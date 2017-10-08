@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-8-1 22:23:38 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.vr.domain.EvaluationParentComment" table="evaluation_parent_comment" dynamic-insert="true" dynamic-update="true">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+        <property name="evaluationId" type="int">
+            <column name="evaluation_id" />
+        </property>
+        
+        <property name="userId" type="int">
+            <column name="user_id" />
+        </property>
+        
+        <property name="comment" type="java.lang.String">
+            <column name="comment" />
+        </property>
+        
+        <property name="postTime" type="java.util.Date">
+            <column name="post_time" />
+        </property>
+           <property name="ups" type="int" >
+            <column name="ups"  />
+        </property>
+        <set name="childComments" cascade="save-update,delete" lazy="false">
+        	<key column="comment_id" ></key>
+        	<one-to-many class="com.vr.domain.EvaluationChildComment"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
