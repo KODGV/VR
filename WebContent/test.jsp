@@ -13,7 +13,7 @@
 </form>
  
 <form name="Form2" action="saveProduct" method="post"  enctype="multipart/form-data">
-<h1>采用multipart提供的file.transfer方法上传文件</h1>
+<h1>采用multipart提供的file.transfer方法上传文件[[[]]]</h1>
 <input type="file" name="file">
 <input type="submit" value="upload"/>
 </form>
