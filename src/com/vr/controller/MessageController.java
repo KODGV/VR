@@ -75,10 +75,10 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping("/MessageLeaving/show/{uid}")
 	@JsonView(MessageLeavingView.Tag.class)
-	public List<MessageLeaving> ShowMessageLeaving(@PathVariable String uid) {
+	public List<MessageLeaving> ShowMessageLeaving(@PathVariable String uid,HttpServletRequest request) {
 		int userid = Integer.parseInt(uid);
 
-		HttpServletRequest request = ContextUtil.getRequest();
+
 		String belong = request.getParameter("belong");
 
 		String condition = request.getParameter("condition");

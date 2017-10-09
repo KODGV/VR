@@ -20,6 +20,7 @@ import com.vr.dao.QuestionDao;
 import com.vr.domain.AllInOnePc;
 import com.vr.domain.Answer;
 import com.vr.domain.MobileBox;
+import com.vr.domain.News;
 import com.vr.domain.PcheadSet;
 import com.vr.domain.Question;
 import com.vr.service.AnswerService;
@@ -76,9 +77,9 @@ public class QuestionController extends HibernateUtils{
 	
 	@ResponseBody
 	@RequestMapping("/Question/type")
-	public List<Object>getName()
+	public List<Object>getName(HttpServletRequest request,@RequestBody News a)
 	{
-		HttpServletRequest request = ContextUtil.getRequest();
+		System.out.println(a.getContent());
 		String name = request.getParameter("type");
 		String hql="from "+name;
 		List<Object>list=findByHqlGetList(hql, new Object[]{});

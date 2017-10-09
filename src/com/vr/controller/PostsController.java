@@ -72,9 +72,9 @@ public class PostsController {
 	//展示帖子列表
 	@ResponseBody
 	@RequestMapping(value = "/bbs_list/{page}")
-	public List<Posts> getPostsByPage(@PathVariable Integer page) {
+	public List<Posts> getPostsByPage(@PathVariable Integer page,HttpServletRequest request) {
 		System.out.print(page);
-		HttpServletRequest request = ContextUtil.getRequest();
+	
 		String theme= request.getParameter("theme");
 		System.out.println("theme " + theme);
 		return PostsService.getPostsByPage(page, 10, theme);
@@ -83,8 +83,8 @@ public class PostsController {
 	//获取目前的总帖子数
 	@ResponseBody
 	@RequestMapping(value = "/total_post")
-	public Object getTotalPosts() {
-		HttpServletRequest request = ContextUtil.getRequest();
+	public Object getTotalPosts(HttpServletRequest request) {
+		
 		String theme= request.getParameter("theme");
 		return PostsService.getTotalPost(theme);
 	}

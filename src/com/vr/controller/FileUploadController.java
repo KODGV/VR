@@ -91,6 +91,7 @@ public class FileUploadController {
 	/*
 	 * 黄俊聪写的，压缩包上传图片文件
 	 * 注意文件路径是在/etc/VR.properties文件中配置
+	 * 并没有限制图片的类型
 	 */
 	
 	
@@ -100,7 +101,7 @@ public class FileUploadController {
 		System.out.println("begin");
 		String type=file.getContentType();
 		String urlprefix=PropertyUtil.readProperty("imgurl");
-		//以‘/’来获取文件的路径后缀
+		//以‘/’来获取文件的路径后缀以作为文件保存的路径
 		String[]strs=urlprefix.split("/");
 		//忽略VR项目名前的所有路径
 		if(strs.length<=3)
