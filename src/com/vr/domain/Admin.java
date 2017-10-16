@@ -9,6 +9,15 @@ public class Admin implements java.io.Serializable {
 	private Integer id;
 	private String adminname;
 	private String password;
+	private String checkcode;
+
+	public String getCheckcode() {
+		return checkcode;
+	}
+
+	public void setCheckcode(String checkcode) {
+		this.checkcode = checkcode;
+	}
 
 	public Admin() {
 	}

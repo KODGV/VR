@@ -121,7 +121,6 @@ public class FileUploadController {
 			return new CommonResult(Result.FILE_NOT_SUPPORT);
 		//	return new CommonResult(Result.FILE_NOT_SUPPORT);
 	}
-		System.out.println(file.getContentType());
 		File targetFile = new File("/tmp/", "Imgs.zip");
 		if (!targetFile.exists()) {
 			targetFile.mkdirs();
@@ -134,6 +133,7 @@ public class FileUploadController {
 		return new CommonResult(Result.SYSTEM_EXCEPTION);
 	}
 		List<File>files=ZipUtil.upzipFile(targetFile, path);
+
 		if(files.isEmpty())
 		{
 			System.out.println("null");
@@ -159,7 +159,7 @@ public class FileUploadController {
       CMfile.transferTo(file);
       Excel excel=new Excel();
       List<List<Map<String, String>>>list=excel.readExcelToObj(file);
-      System.out.println(list.size());
+
       allInOnePCDao.updateAllInOnePCByExcel(list.get(1));
       pcHeadSetDao.updatePCHeadSet(list.get(0));
       mobileBoxDaoImpl.updateMobileBox(list.get(2));

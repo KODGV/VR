@@ -131,7 +131,7 @@ public class EvaluationServiceImpl implements EvaluationService {
 			int comments = ((Long) evaluationDao.getComments(evaluation.getEvaluationId())).intValue();
 			evaluation.setComments(comments);
 		}
-		int totalCount = ((Long) evaluationDao.getEvaluationCount()).intValue();
+		int totalCount = evaluationVOs.size();
 		Page p = new Page(page, totalCount / size + (totalCount % size == 0 ? 0 : 1));
 //		System.out.println(EvaluationVO);
 		Map<String, Object> map = new HashMap<>();

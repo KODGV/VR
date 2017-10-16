@@ -19,9 +19,9 @@ public class Encyclopedia_propServiceImpl implements Encyclopedia_propService {
 	private Encyclopedia_propDao ency_propdao;
 	
 	@Override
-	public Encyclopedia_prop getEncyclopedia_propById(int id) {
+	public Encyclopedia_prop getEncyclopedia_propById(int id,int prop_id) {
 		// TODO Auto-generated method stub
-		return null;
+		return ency_propdao.getEncyclopedia_prop(id, prop_id);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class Encyclopedia_propServiceImpl implements Encyclopedia_propService {
 	@Override
 	public List<Encyclopedia_prop> getEncyclopedia_propsById(int id) {
 		// TODO Auto-generated method stub
-		System.out.println("2222");
+
 		return ency_propdao.getEncyclopedia_propsById(id);
 	}
 
@@ -67,5 +67,15 @@ public class Encyclopedia_propServiceImpl implements Encyclopedia_propService {
 		// TODO Auto-generated method stub
 		return ency_propdao.updateEncyclopedia_prop(ency_prop);
 	}
+
+	@Override
+	public boolean encyclopedia_prodelete(int id,int prop_id) {
+		// TODO Auto-generated method stub
+		
+		
+		return ency_propdao.deleteEncyclopedia_prop(getEncyclopedia_propById(id, prop_id));
+	}
+
+
 
 }

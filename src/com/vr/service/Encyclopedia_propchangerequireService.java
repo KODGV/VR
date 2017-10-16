@@ -13,4 +13,5 @@ public interface Encyclopedia_propchangerequireService {
     public boolean deleteEncyclopedia_propchangerequire(Encyclopedia_propchangerequire ency_propchangerequire);
     public boolean updateEncyclopedia_propchangerequire(Encyclopedia_propchangerequire ency_propchangerequire);
     public List<Encyclopedia_proprequireData> getEncyclopedia_proprequireBypage(int pageNum,int pageSize);
+    public boolean delteEncyclopedia_proprequire(int id,int prop_id);
 }

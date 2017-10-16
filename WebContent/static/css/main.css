@@ -124,3 +124,6 @@ a{text-decoration: none}
 .img-inputer__preview-img {
     height: 100%;
 }
+.v-modal {
+    z-index: 1000 !important;
+}

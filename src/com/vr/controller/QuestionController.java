@@ -77,10 +77,10 @@ public class QuestionController extends HibernateUtils{
 	
 	@ResponseBody
 	@RequestMapping("/Question/type")
-	public List<Object>getName(HttpServletRequest request,@RequestBody News a)
-	{
-		System.out.println(a.getContent());
+	public List<Object>getName(HttpServletRequest request)
+	{	
 		String name = request.getParameter("type");
+		System.out.println(name);
 		String hql="from "+name;
 		List<Object>list=findByHqlGetList(hql, new Object[]{});
 		List<Object>real=new ArrayList<>();

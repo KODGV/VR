@@ -29,6 +29,9 @@ public class MobileBoxDaoImpl extends HibernateUtils implements MobileBoxDao{
 		for (Map<String, String> map : list) {
 			if(map.size()==0)
 				break;
+			if (checkRepeated(map.get("品牌"), map.get("销售型号（名）"), map.get("产品型号"))) {
+				continue;
+			}
 			MobileBox mobileBox = new MobileBox();
 			mobileBox.setAdapterphone(map.get("适配手机"));
 			mobileBox.setBluerayirradiance(map.get("蓝光辐照度（W·m^-2·sr^-1）"));
@@ -107,4 +110,17 @@ public class MobileBoxDaoImpl extends HibernateUtils implements MobileBoxDao{
 		String hql = "from MobileBox p where p.offsale=1";		
 		return findByHqlGetList(hql, new Object[]{});
 	}
+	@Override
+	public boolean checkRepeated(String brand, String salesmodel, String productmodel) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		String hql1 = "select count(*) from MobileBox a";
+		Long size=(Long)getSize(hql1);
+		String hql = "from MobileBox p where p.brand=? and p.salesmodel=? ";
+		if (findByHql(hql, new Object[] { brand, salesmodel }) != null) {
+			flag = true;
+		}
+		return flag;
+	}
+	
 }

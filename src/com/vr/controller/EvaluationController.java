@@ -30,6 +30,7 @@ import com.vr.domain.EvaluationView;
 import com.vr.domain.User;
 import com.vr.domain.enums.EvaluationViewType;
 import com.vr.service.EvaluationService;
+import com.vr.util.DecodeUtil;
 import com.vr.util.response.CommonResult;
 import com.vr.util.response.Result;
 import com.vr.vo.OrderType;
@@ -190,12 +191,12 @@ public class EvaluationController {
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	@RequestMapping(value="/evaluations/{evaluationId}/parentComment",method=RequestMethod.POST)
+	@RequestMapping(value="/evaluations/{evaluationId}/parentComment",method=RequestMethod.POST,produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public CommonResult addParentComment(HttpSession session,
 			@PathVariable("evaluationId")Integer evaluationId,
 			@RequestParam("content")String content) throws UnsupportedEncodingException{
-		content=new String(content.getBytes("iso-8859-1"),"UTF-8");
+	
 
 		User user=(User)session.getAttribute("user");
 		if(user==null){
@@ -248,12 +249,13 @@ public class EvaluationController {
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	@RequestMapping(value="/evaluations/comments/{commentId}/childComment",method=RequestMethod.POST)
+	@RequestMapping(value="/evaluations/comments/{commentId}/childComment",method=RequestMethod.POST,produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public CommonResult addChildComment(HttpSession session,
 			@PathVariable("commentId")Integer commentId,
 			@RequestParam("comment")String content) throws UnsupportedEncodingException{
-		content=new String(content.getBytes("iso-8859-1"),"UTF-8");
+
+
 		User user=(User)session.getAttribute("user");
 		if(user==null){
 			return new CommonResult(Result.USER_NOT_LOGIN);

@@ -47,8 +47,22 @@ public class Encyclopedia_propchangerequireServiceImpl  implements Encyclopedia_
 	public List<Encyclopedia_proprequireData> getEncyclopedia_proprequireBypage(
 			int pageNum, int pageSize) {
 		// TODO Auto-generated method stub
-		System.out.println("2222");
 		return ency_propchangerequiredao.getEncyclopedia_proprequireBypage(pageNum, pageSize);
+	}
+
+	@Override
+	public boolean delteEncyclopedia_proprequire(int id, int prop_id) {
+		// TODO Auto-generated method stub
+		List<Object> objects=ency_propchangerequiredao.getEncyclopedia_proprequire(id,prop_id);
+		boolean flag=true;
+		for(Object o:objects)
+		{
+			if(!ency_propchangerequiredao.deleteEncyclopedia_propchangerequire((Encyclopedia_propchangerequire)o))
+			{
+				flag=false;
+			}
+		}
+		return flag;
 	}
 
 }

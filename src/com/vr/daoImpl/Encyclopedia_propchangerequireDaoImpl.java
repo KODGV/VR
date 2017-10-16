@@ -60,7 +60,6 @@ public class Encyclopedia_propchangerequireDaoImpl  extends HibernateUtils imple
 	@Override
 	public List<Encyclopedia_proprequireData> getEncyclopedia_proprequireBypage(
 			int pageNum, int pageSize) {
-		System.out.println("3333");
 		// TODO Auto-generated method stub
 		pageNum--;
 		pageNum*=pageSize;
@@ -92,6 +91,13 @@ public class Encyclopedia_propchangerequireDaoImpl  extends HibernateUtils imple
 		}
 		System.out.println("5555");
 		return result;
+	}
+
+	@Override
+	public List<Object> getEncyclopedia_proprequire(int id, int prop_id) {
+		// TODO Auto-generated method stub
+		List<Object> objs=findByHqlGetList("from Encyclopedia_propchangerequire n where n.id=? and n.prop_id=?", new Object[]{id,prop_id});
+		return objs;
 	}
 
 }

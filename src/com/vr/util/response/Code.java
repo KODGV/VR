@@ -29,7 +29,7 @@ public interface Code {
 	int OCCUPIED_NICKNAME = 304;
 	
 	// 未登录
-	int NOT_LOGGED = 400;
+	int NOT_LOGGED = 1001;
 	
 	// 无权访问
 	int NOT_PERMISSION = 401;

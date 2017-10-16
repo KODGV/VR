@@ -27,4 +27,6 @@ public interface PCHeadSetDao {
     public boolean updatePCHeadSet(PcheadSet pcHeadSet);
     public List<Object>getPCHeadSetOnsale();
     public List<Object>getPCHeadSetOffsale();
+    
+    public boolean checkRepeated(String brand,String salesmodel,String productmodel);
 }

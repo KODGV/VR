@@ -76,9 +76,7 @@ public class MessageController {
 	@RequestMapping("/MessageLeaving/show/{uid}")
 	@JsonView(MessageLeavingView.Tag.class)
 	public List<MessageLeaving> ShowMessageLeaving(@PathVariable String uid,HttpServletRequest request) {
-		int userid = Integer.parseInt(uid);
-
-
+		
 		String belong = request.getParameter("belong");
 
 		String condition = request.getParameter("condition");

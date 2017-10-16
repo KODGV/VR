@@ -173,7 +173,7 @@ public class UserController {
 
 		if (currentTime - tstmp > 60 * 60 * 1000 * 24) {
 			try {
-				Mail.sendMail("reao123@163.com", "1a2s3d4f", "smtp.163.com", u.getEmail(), u.getId(),
+				Mail.sendMail("kodgv123@163.com", "1A2S3D4F", "smtp.163.com", u.getEmail(), u.getId(),
 						request.getServerName() + ":" + request.getServerPort() + request.getContextPath());
 			} catch (Exception e) {
 				return new ResponseData(Code.SYSTEM_ERROR);

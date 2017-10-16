@@ -26,6 +26,9 @@ public class AllInOnePCDaoImpl extends HibernateUtils implements AllInOnePCDao {
 		for (Map<String, String> map : list) {
 			if (map.size() == 0)
 				break;
+			if (checkRepeated(map.get("品牌"), map.get("销售型号（名）"), map.get("产品型号"))) {
+				continue;
+			}
 			System.out.println(map.get("品牌"));
 			AllInOnePc allInOnePc = new AllInOnePc();
 			allInOnePc.setBatteryCapacity(map.get("电池容量（mAh）"));
@@ -98,6 +101,25 @@ public class AllInOnePCDaoImpl extends HibernateUtils implements AllInOnePCDao {
 		// TODO Auto-generated method stub
 		String hql = "from AllInOnePc p where p.offsale=1";
 		return findByHqlGetList(hql, new Object[] {});
+	}
+
+	/*
+	 * 以三个参数作为产品唯一性的判断标准 (non-Javadoc)
+	 * 
+	 * @see com.vr.dao.AllInOnePCDao#checkRepeated(java.lang.String,
+	 * java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean checkRepeated(String brand, String salesmodel, String productmodel) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		String hql1 = "select count(*) from AllInOnePc a";
+		Long size=(Long)getSize(hql1);
+		String hql = "from AllInOnePc p where p.brand=? and p.salesmodel=? ";
+		if (findByHql(hql, new Object[] { brand, salesmodel }) != null) {
+			flag = true;
+		}
+		return flag;
 	}
 
 }

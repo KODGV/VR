@@ -112,6 +112,12 @@ public class EncyclopediaServiceImpl implements EncyclopediaService {
 		}
 		return all_HJCs;
 	}
+
+	@Override
+	public boolean deleteEncylopedia(int id) {
+		// TODO Auto-generated method stub
+		return encydao.deleteEncyclopedia(getEncyclopediaById(id));
+	}
 	
 	
 	

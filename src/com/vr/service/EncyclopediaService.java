@@ -21,4 +21,5 @@ public interface EncyclopediaService {
 	 public boolean up(int id);
 	 public boolean down(int id);
 	 public List<Encyclopedia_all_HJC> getEncylopediaAllService(int pageNum);
+	 public boolean deleteEncylopedia(int id);
 }

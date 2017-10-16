@@ -14,5 +14,6 @@ public interface Encyclopedia_propDao {
     public List<Encyclopedia_prop> getEncyclopedia_propsById(Integer id);
     public List<Encyclopedia_prop> getEncyclopedia_propsByKeyword(String keyword);
     public Encyclopedia_prop getFirstEncyclopedia_propById(int id);
+    public Encyclopedia_prop getEncyclopedia_prop(int id,int prop_id);
 
 }

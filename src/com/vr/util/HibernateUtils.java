@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
 import com.vr.domain.Encyclopedia;
@@ -17,7 +18,7 @@ import com.vr.exception.DaoException;
 
 public class HibernateUtils {
 	@Autowired
-	private SessionFactory sessionFactory;
+	private static SessionFactory sessionFactory;
 	
 
 	public SessionFactory getSessionFactory() {
@@ -25,7 +26,7 @@ public class HibernateUtils {
 	}
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+		HibernateUtils.sessionFactory = sessionFactory;
 	}
 	
 	public boolean saveNew(Object obj) {
@@ -40,7 +41,9 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		} finally {
-			session.close();
+			session.close();	
+		
+			
 		}
 		return status;
 	}
@@ -58,7 +61,7 @@ public class HibernateUtils {
 			tx.rollback();
 			throw new DaoException();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return status;
 	}
@@ -76,7 +79,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return status;
 	}
@@ -86,7 +89,6 @@ public class HibernateUtils {
 		Transaction tx = session.beginTransaction();
 		boolean status = false;
 		try {
-	
 			session.delete(session.merge(obj));
 			tx.commit();
 			status = true;
@@ -94,7 +96,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return status;
 	}
@@ -112,7 +114,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return status;
 	}
@@ -134,7 +136,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return result;
 	}
@@ -156,7 +158,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return list;
 	}
@@ -177,7 +179,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return list;
 
@@ -195,7 +197,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return obj;
 	}
@@ -213,7 +215,7 @@ public class HibernateUtils {
 			tx.rollback();
 			e.printStackTrace();
 		} finally {
-			session.close();
+			session.close();	
 		}
 	}
 	public boolean deleteByQuery(String hql, List<Object> conditions) {
@@ -234,7 +236,7 @@ public class HibernateUtils {
 			transaction.rollback();
 			return false;
 		} finally {
-			session.close();
+			session.close();	
 		}
 	}
 	public boolean deleteUserByHql(Object id)
@@ -295,7 +297,7 @@ public class HibernateUtils {
 			transaction.rollback();
 			return false;
 		} finally {
-			session.close();
+			session.close();	
 		}
 	}
 	public Object findBySQL(String sql, Object[] condition,Class<?> clazz) {
@@ -314,7 +316,7 @@ public class HibernateUtils {
 			tx.rollback();
 			e.printStackTrace();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return result;
 	}
@@ -343,7 +345,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		}finally{
-			session.close();
+			session.close();	
 		}
 		return list;
 		}
@@ -361,7 +363,7 @@ public class HibernateUtils {
 			tx.rollback();
 			throw new DaoException();
 		} finally {
-			session.close();
+			session.close();	
 		}
 		return status;
 	}
@@ -380,7 +382,7 @@ public class HibernateUtils {
 			e.printStackTrace();
 			tx.rollback();
 		}finally{
-			session.close();
+			session.close();	
 		}
 		return result;
 	}

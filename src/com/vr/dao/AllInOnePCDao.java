@@ -14,4 +14,5 @@ public interface AllInOnePCDao {
     public Object getAllInOneSize();
     public List<Object>getAllInOnePCOnsale();
     public List<Object>getAllInOnePCOffsale();
+    public boolean checkRepeated(String brand,String salesmodel,String productmodel);
 }

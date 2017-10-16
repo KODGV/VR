@@ -2,6 +2,7 @@ package com.vr.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vr.dao.EncyclopediaDao;
@@ -222,5 +224,36 @@ public class EncyclopediaController extends HibernateUtils {
 		 }
 		return l;	
 	}
-
+	
+	@ResponseBody
+	@RequestMapping("/encyclopediaDelete")
+	public int deleteEncyclopedia(@RequestBody Map<String,String> map)
+	{
+		int id=Integer.valueOf(map.get("id"));
+		int prop_id=Integer.valueOf(map.get("prop_id"));
+		int state=0;
+		List<Encyclopedia_prop> encyclopedia_props=ency_propservice.getEncyclopedia_propsById(id);
+		System.out.println(id);
+		System.out.println(prop_id);
+		System.out.println("hhh");
+		System.out.println(encyclopedia_props.size());
+		ency_propchangerequireservice.delteEncyclopedia_proprequire(id, prop_id);
+		if(encyclopedia_props.size()==1)
+		{
+			if(ency_propservice.encyclopedia_prodelete(id,prop_id) && encyservice.deleteEncylopedia(id))		
+			{
+				System.out.println("kkk");
+				state=1;
+			}
+		}
+		else
+		{
+			if(ency_propservice.encyclopedia_prodelete(id,prop_id));
+				state=1;
+		}
+		
+		
+		return state;
+	}
+	
 }

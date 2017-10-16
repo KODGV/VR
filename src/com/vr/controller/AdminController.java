@@ -32,15 +32,20 @@ public class AdminController {
 	public void setAdminDao(AdminDao adminDao) {
 		this.adminDao = adminDao;
 	}
+
 	@ResponseBody
 	@RequestMapping("/admin/login")
-	public Data adminLogin(@RequestBody Admin admin)
+	public Data adminLogin(@RequestBody Admin admin, HttpSession session)
 	{
 		Data data=new Data(null);
-		System.out.println(admin.toString());
+	if(!admin.getCheckcode().equalsIgnoreCase((String) session.getAttribute("code")))
+			{
+		data.setData(Code.WRONG_CHECKCODE);
+		return data;
+			}
 		if(adminDao.checkPassword(admin)==Code.SUCCEED)
 		{
-			HttpSession session=ContextUtil.getSession();
+
 			session.setAttribute("admin", admin);
 			data.setData(Code.SUCCEED);
 		}
@@ -50,5 +55,5 @@ public class AdminController {
 		}
 		return data;
 	}
-	
+
 }

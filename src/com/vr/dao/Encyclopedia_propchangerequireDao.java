@@ -13,5 +13,6 @@ public interface Encyclopedia_propchangerequireDao {
     public boolean isexist(Encyclopedia_propchangerequire ency_propchangerequire);
     public List<Encyclopedia_propchangerequire> getAllRequire();
     public List<Encyclopedia_proprequireData> getEncyclopedia_proprequireBypage(int pageNum,int pageSize);
+    public List<Object> getEncyclopedia_proprequire(int id,int prop_id);
 
 }

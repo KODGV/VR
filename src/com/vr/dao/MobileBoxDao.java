@@ -24,4 +24,7 @@ public interface MobileBoxDao {
     public boolean updateMobileBox(MobileBox MobileBox);
     public List<Object>getMobileBoxOnsale();
     public List<Object>getMobileBoxOffsale();
+    
+    
+    public boolean checkRepeated(String brand,String salesmodel,String productmodel);
 }
