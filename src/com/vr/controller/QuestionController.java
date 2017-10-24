@@ -2,6 +2,7 @@ package com.vr.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -55,8 +56,16 @@ public class QuestionController extends HibernateUtils{
 	@ResponseBody
 	@RequestMapping("/Question")
 	@JsonView(QuestionView.Tag.class)
-	public List<Question> getQuestion() {
-		return dao.getQuestions();
+	public List<String> getQuestion() {
+		List<Question> questions= dao.getQuestions();
+		List<String> questionNames=new ArrayList<>();
+		for(Question o:questions)
+		{
+			String name=o.getQuestionname();
+			if(!questionNames.contains(name))
+				questionNames.add(name);
+		}
+		return questionNames;
 		 
 	}
 	// ok
@@ -69,49 +78,53 @@ public class QuestionController extends HibernateUtils{
 
 	@ResponseBody
 	@RequestMapping("/Answer/statistic")
-	public List<Statisticalanswer> getAnswers(@RequestParam("productname")String pn,@RequestParam("producttype")String pt) {
-		String productname=EncodeUtil.encodeStr(pn);
+	public List<Statisticalanswer> getAnswers(@RequestParam("producttype")String pt) {
 		String producttype=EncodeUtil.encodeStr(pt);
-		return answerService.getStatisticalData(productname,producttype);
+		return answerService.getStatisticalData(producttype);
 	}
 	
 	@ResponseBody
+	@JsonView(QuestionView.Tag.class)
 	@RequestMapping("/Question/type")
-	public List<Object>getName(HttpServletRequest request)
+	public List<Question>getName(@RequestParam("type")String name)
 	{	
-		String name = request.getParameter("type");
 		System.out.println(name);
-		String hql="from "+name;
-		List<Object>list=findByHqlGetList(hql, new Object[]{});
-		List<Object>real=new ArrayList<>();
-		if(name.equals("AllInOnePc"))
+		List<Question>questions=new ArrayList<>();
+		List<Object>objects= dao.SearchQuestion(name);
+		for(Object o:objects)
 		{
-			for(Object l:list)
-			{
-				AllInOnePc allInOnePc=(AllInOnePc)l;
-				Object o=allInOnePc.getSalesmodel();
-				real.add(o);
-			}		
+			questions.add((Question)o);
 		}
-		if(name.equals("MobileBox"))
-		{
-			for(Object l:list)
-			{
-				MobileBox mobileBox=(MobileBox)l;
-				Object o=mobileBox.getSalesmodel();
-				real.add(o);
-			}		
-		}
-		if(name.equals("PcheadSet"))
-		{
-			for(Object l:list)
-			{
-				PcheadSet pcheadSet=(PcheadSet)l;
-				Object o=pcheadSet.getSalesmodel();
-				real.add(o);
-			}		
-		}		
-		return real;
+		System.out.println(questions.size());
+		return questions;
+//		if(name.equals("AllInOnePc"))
+//		{
+//			for(Object l:list)
+//			{
+//				AllInOnePc allInOnePc=(AllInOnePc)l;
+//				Object o=allInOnePc.getSalesmodel();
+//				real.add(o);
+//			}		
+//		}
+//		if(name.equals("MobileBox"))
+//		{
+//			for(Object l:list)
+//			{
+//				MobileBox mobileBox=(MobileBox)l;
+//				Object o=mobileBox.getSalesmodel();
+//				real.add(o);
+//			}		
+//		}
+//		if(name.equals("PcheadSet"))
+//		{
+//			for(Object l:list)
+//			{
+//				PcheadSet pcheadSet=(PcheadSet)l;
+//				Object o=pcheadSet.getSalesmodel();
+//				real.add(o);
+//			}		
+//		}		
+	
 	}
 	/*
 	 * 管理员端
@@ -125,7 +138,6 @@ public class QuestionController extends HibernateUtils{
 	@ResponseBody
 	@RequestMapping("/admin/Question/modify")
 	public ResponseData modifyQuestion(@RequestBody  List<Question>questions) {
-		System.out.println(questions.size());
 		if (questionService.updateQuestions(questions)) {
 			return new ResponseData(Code.SUCCEED);
 		} else {
@@ -139,6 +151,19 @@ public class QuestionController extends HibernateUtils{
 	@RequestMapping("/admin/Question/deleteQuestion/{qid}")
 	public ResponseData deleteQuestion(@PathVariable int qid) {
 		if (dao.deleteQuestion(qid)) {
+			return new ResponseData(Code.SUCCEED);
+		} else {
+			return new ResponseData(Code.DATABASE_ERROR);
+		}
+	}
+	/*
+	 * 删除问卷
+	 */
+	@ResponseBody
+	@RequestMapping("/Question/deleteQuestionare")
+	public ResponseData deleteQuestionaire(@RequestBody Map<String, String> map) {
+		String name=map.get("questionnaireName");
+		if (dao.deleteQuestionaire(name)) {
 			return new ResponseData(Code.SUCCEED);
 		} else {
 			return new ResponseData(Code.DATABASE_ERROR);

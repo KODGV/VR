@@ -10,10 +10,12 @@ import com.vr.domain.Question;
 public interface QuestionDao {
 	public boolean addQuestion(Question question);
 	public Question getQuestion(String question);
-	public boolean deleteAllQuestion();
-
+	public boolean deleteAllQuestion(String name);
+	public boolean deleteQuestionaire(String name);
 	public void updateQuestion(File file) throws IOException;
 
 	public List<Question> getQuestions();
 	public boolean deleteQuestion(int id);
+	public List<Object> SearchQuestion(String name);
+	public List<Question> getQuestions(String producttype);
 }

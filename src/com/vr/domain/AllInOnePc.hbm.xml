@@ -92,6 +92,10 @@
         <property name="hot" type="string">
             <column name="Hot" length="65535" />
         </property>
+             <property name="riskLevel" type="string">
+            <column name="riskLevel" length="65535" />
+        </property>
+        
           <property name="offsale" type="java.lang.Integer">
             <column name="Offsale" />
         </property>

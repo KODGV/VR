@@ -17,7 +17,34 @@ public class Question implements java.io.Serializable {
 	private String question;
 	@JsonView(QuestionView.Tag.class)
 	private String questiontype;
+	@JsonView(QuestionView.Tag.class)
+	private String questionname;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private Set answers = new HashSet(0);
+
+	public String getQuestionname() {
+		return questionname;
+	}
+
+	public void setQuestionname(String questionname) {
+		this.questionname = questionname;
+	}
 
 	public Question() {
 	}

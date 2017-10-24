@@ -32,6 +32,7 @@ public class MobileBoxDaoImpl extends HibernateUtils implements MobileBoxDao{
 			if (checkRepeated(map.get("品牌"), map.get("销售型号（名）"), map.get("产品型号"))) {
 				continue;
 			}
+		
 			MobileBox mobileBox = new MobileBox();
 			mobileBox.setAdapterphone(map.get("适配手机"));
 			mobileBox.setBluerayirradiance(map.get("蓝光辐照度（W·m^-2·sr^-1）"));
@@ -58,6 +59,7 @@ public class MobileBoxDaoImpl extends HibernateUtils implements MobileBoxDao{
 			mobileBox.setWeight(map.get("重量(kg)"));
 			mobileBox.setWorkingtemperature(map.get("工作温度(℃)"));
 			mobileBox.setPicLocation(urlprefix+map.get("图片"));
+			mobileBox.setRiskLevel(map.get("风险等级"));
 			mobileBox.setOffsale(1);
 			save(mobileBox);
 		

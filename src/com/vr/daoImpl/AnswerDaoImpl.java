@@ -29,10 +29,10 @@ public class AnswerDaoImpl extends HibernateUtils implements AnswerDao{
 	}
 
 	@Override
-	public List<Object> getAnswers(Question question,String productname,String producttype) {
+	public List<Object> getAnswers(Question question,String producttype) {
 		// TODO Auto-generated method stub
-		String hql="from Answer a where a.question=? and a.productname=? and a.producttype=?";
-		return findByHqlGetList(hql, new Object[]{question,productname,producttype});
+		String hql="from Answer a where a.question=? and a.producttype=?";
+		return findByHqlGetList(hql, new Object[]{question,producttype});
 	}
 
 	@Override
@@ -70,5 +70,7 @@ public class AnswerDaoImpl extends HibernateUtils implements AnswerDao{
 		String hql="from Answer a where a.question=?";
 		return findByHqlGetList(hql, new Object[]{question});
 	}
+
+
 
 }

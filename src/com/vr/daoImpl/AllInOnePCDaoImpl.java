@@ -29,7 +29,9 @@ public class AllInOnePCDaoImpl extends HibernateUtils implements AllInOnePCDao {
 			if (checkRepeated(map.get("品牌"), map.get("销售型号（名）"), map.get("产品型号"))) {
 				continue;
 			}
-			System.out.println(map.get("品牌"));
+		
+			System.out.println("风险等级");
+			System.out.println(map.get("风险等级"));
 			AllInOnePc allInOnePc = new AllInOnePc();
 			allInOnePc.setBatteryCapacity(map.get("电池容量（mAh）"));
 			allInOnePc.setBluerayirradiance(map.get("蓝光辐照度（W·m^-2·sr^-1）"));
@@ -56,6 +58,7 @@ public class AllInOnePCDaoImpl extends HibernateUtils implements AllInOnePCDao {
 			allInOnePc.setTrackingmode(map.get("跟踪模式"));
 			allInOnePc.setTrackingrange(map.get("跟踪范围（m）"));
 			allInOnePc.setWeight(map.get("重量(kg)"));
+			allInOnePc.setRiskLevel(map.get("风险等级"));
 			allInOnePc.setWorkingtemperature(map.get("工作温度(℃)"));
 			allInOnePc.setPicLocation(urlprefix + map.get("图片"));
 			allInOnePc.setOffsale(1);

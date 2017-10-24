@@ -14,6 +14,9 @@
         <property name="questiontype" type="string">
             <column name="Questiontype" length="45" />
         </property>
+              <property name="questionname" type="string">
+            <column name="Questionname" length="65535" />
+        </property>
         <set name="answers" table="Answer" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="questionid" />

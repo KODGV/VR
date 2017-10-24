@@ -38,10 +38,10 @@ public class AnswerServiceImpl implements AnswerService{
 		this.questionDao = questionDao;
 	}
 	@Override
-	public List<Statisticalanswer> getStatisticalData(String productname,String producttype) {
+	public List<Statisticalanswer> getStatisticalData(String producttype) {
 		// TODO Auto-generated method stub
 		List<Statisticalanswer>statisticalanswers=new ArrayList<>();
-		List<Question>list=questionDao.getQuestions();
+		List<Question>list=questionDao.getQuestions(producttype);
 		System.out.println("问题");
 		System.out.println(list.size());
 		for(Question q:list)
@@ -50,7 +50,7 @@ public class AnswerServiceImpl implements AnswerService{
 				continue;
 			int one=0;
 			int two=0;
-			List<Object> answers=answerDao.getAnswers(q,productname,producttype);
+			List<Object> answers=answerDao.getAnswers(q,producttype);
 			int size=answers.size();
 			for(Object a:answers)
 			{

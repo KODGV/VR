@@ -55,7 +55,15 @@ public class Encyclopedia_propDaoImpl extends HibernateUtils implements Encyclop
 		}
 		return ency_prop;
 	}
+	@Override
+	public List<Object> getEncyclopedia_propsByKeywordvague(String keyword) {
+		// TODO Auto-generated method stub
 
+		return findByHqlGetList("from Encyclopedia_prop n where n.prop_keyword like ?",new Object[]{"%"+keyword+"%"});
+	
+		
+		
+	}
 	@Override
 	public Encyclopedia_prop getFirstEncyclopedia_propById(int id) {
 		

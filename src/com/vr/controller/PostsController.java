@@ -126,7 +126,10 @@ public class PostsController {
 		int userid = Integer.parseInt(uid);
 		Admin user = adminService.getAdminById(userid);
 		Posts posts= PostsService.PostSave(user, title, content, theme);
-		
+		if(posts!=null)
+			return ;
+		else
+			return ;
 	}
 	
 	//管理员后台删帖
@@ -187,7 +190,10 @@ public class PostsController {
 		posts.setContents(contents);
 		if(theme.length()!=0)
 		posts.setTheme(theme);
-		PostsService.updatePosts(posts);
+		if(PostsService.updatePosts(posts))
+			return ;
+		else
+			return ;
 	}
 	
 	//管理员后台更新帖子评论

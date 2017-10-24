@@ -1,5 +1,6 @@
 package com.vr.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,16 @@ import com.vr.dao.EncyclopediaDao;
 import com.vr.dao.Encyclopedia_propDao;
 import com.vr.domain.Encyclopedia_prop;
 import com.vr.service.Encyclopedia_propService;
+import com.vr.util.response.Encyclopedia_all_HJC;
+import com.vr.util.response.Encyclopedia_propSearchResultData;
+
+import jdk.nashorn.internal.runtime.ECMAException;
 @Service
 @Qualifier("encyclopedia_propServiceImpl")
 public class Encyclopedia_propServiceImpl implements Encyclopedia_propService {
-
+	@Autowired
+	@Qualifier("encyclopediaDaoImpl")
+	private EncyclopediaDao encydao;
 	@Autowired
 	@Qualifier("encyclopedia_propDaoImpl")
 	private Encyclopedia_propDao ency_propdao;
@@ -74,6 +81,26 @@ public class Encyclopedia_propServiceImpl implements Encyclopedia_propService {
 		
 		
 		return ency_propdao.deleteEncyclopedia_prop(getEncyclopedia_propById(id, prop_id));
+	}
+
+	@Override
+	public List<Encyclopedia_propSearchResultData> encyclopedia_prodeleteSearch(String prop_keyword) {
+		// TODO Auto-generated method stub
+		List<Encyclopedia_propSearchResultData>list=new ArrayList<>();
+		List<Object>props=ency_propdao.getEncyclopedia_propsByKeywordvague(prop_keyword);
+		for(Object o:props)
+		{
+			Encyclopedia_propSearchResultData data=new Encyclopedia_propSearchResultData();
+			Encyclopedia_prop pro=(Encyclopedia_prop)o;
+			data.setId(pro.getId());
+			data.setKeyword(encydao.getEncyclopediaById(pro.getId()).getKeyword());
+			data.setProp_keyword(pro.getProp_keyword());
+			data.setProp_id(pro.getProp_id());
+			list.add(data);
+			
+		}
+		
+		return list;
 	}
 
 

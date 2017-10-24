@@ -56,6 +56,7 @@ public class PCHeadSetDaoImpl extends HibernateUtils implements PCHeadSetDao {
 			pcHeadSet.setTrackingrange(map.get("跟踪范围（m）"));
 			pcHeadSet.setWeight(map.get("重量(kg)"));
 			pcHeadSet.setWorkingtemperature(map.get("工作温度(℃)"));
+			pcHeadSet.setRiskLevel(map.get("风险等级"));
 			pcHeadSet.setOffsale(1);
 			save(pcHeadSet);
 		}

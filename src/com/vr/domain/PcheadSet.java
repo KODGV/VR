@@ -37,8 +37,17 @@ public class PcheadSet implements java.io.Serializable {
 	private String picLocation;
 	private String hot;
 	private int offsale;
+	private String riskLevel;
 	
 
+
+	public String getRiskLevel() {
+		return riskLevel;
+	}
+
+	public void setRiskLevel(String riskLevel) {
+		this.riskLevel = riskLevel;
+	}
 
 	public int getOffsale() {
 		return offsale;

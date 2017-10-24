@@ -18,7 +18,9 @@ public class QuestionServiceImpl implements QuestionService{
 	@Override
 	public boolean updateQuestions(List<Question>questions) {
 		// TODO Auto-generated method stub
-		dao.deleteAllQuestion();
+		if(questions.size()==0)
+			return true;
+		dao.deleteAllQuestion(questions.get(0).getQuestionname());
 		boolean flag=true;
 		for(Question question:questions)
 		{

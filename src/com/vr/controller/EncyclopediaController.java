@@ -207,7 +207,7 @@ public class EncyclopediaController extends HibernateUtils {
 	
 	
 	/*
-	 * 删除
+	 * 词条信息获取
 	 */
 	@ResponseBody
 	@RequestMapping("/encyclopedia/getall/{pn}")
@@ -224,7 +224,9 @@ public class EncyclopediaController extends HibernateUtils {
 		 }
 		return l;	
 	}
-	
+	/*
+	 * 词条信息删除
+	 */
 	@ResponseBody
 	@RequestMapping("/encyclopediaDelete")
 	public int deleteEncyclopedia(@RequestBody Map<String,String> map)
@@ -255,5 +257,26 @@ public class EncyclopediaController extends HibernateUtils {
 		
 		return state;
 	}
+	/*
+	 * 词条删除搜索
+	 */
+	@ResponseBody
+	@RequestMapping("/encyclopediaDeleteSearch")
+	public List<Encyclopedia_propSearchResultData> Deletesearch(@RequestBody Map<String,String> map) {
+
+		String prop_keyword=map.get("prop_keyword");
+		 List<Encyclopedia_propSearchResultData> l=null;
+		try{
+					l= ency_propservice.encyclopedia_prodeleteSearch(prop_keyword);
+				 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+			 l=null;
+		 }
+		return l;	
+
+	}
+
 	
 }

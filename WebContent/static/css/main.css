@@ -127,3 +127,6 @@ a{text-decoration: none}
 .v-modal {
     z-index: 1000 !important;
 }
+p img{
+    max-width: 100%;
+}

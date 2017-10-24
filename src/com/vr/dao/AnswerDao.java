@@ -10,6 +10,7 @@ public interface AnswerDao {
 	 public boolean saveAnswers(List<AnswerRequest> answers);
 	    public boolean deleteByQuestion(Question question);
 	    public boolean updateAnswer(Answer Answer);
-	    public List<Object> getAnswers(Question question,String productname,String producttype);
+	    public List<Object> getAnswers(Question question,String producttype);
 	    public List<Object> getAllAnswers(Question question);
+
 }

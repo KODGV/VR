@@ -42,7 +42,16 @@ public class AllInOnePc implements java.io.Serializable {
 	private String picLocation;
 	private String hot;
 	private Integer offsale;
+	private String riskLevel;
 	
+
+	public String getRiskLevel() {
+		return riskLevel;
+	}
+
+	public void setRiskLevel(String riskLevel) {
+		this.riskLevel = riskLevel;
+	}
 
 	@Override
 	public String toString() {

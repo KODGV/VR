@@ -24,18 +24,24 @@ public class QuestionDaoImpl extends HibernateUtils implements QuestionDao {
 		// TODO Auto-generated method stub
 		return save(question);
 	}
-
 	@Override
-	public boolean deleteAllQuestion() {
+	public boolean deleteAllQuestion(String name) {
 		// TODO Auto-generated method stub
-		deleteall("Answer");
-		return deleteall("Question");
+		String hql="delete from Answer a where a.producttype=?";
+		List<Object> conditions=new ArrayList<>();
+		conditions.add(name);
+	
+		String hql1="delete from Question a where a.questionname=?";
+		if(deleteByQuery(hql, conditions)&&deleteByQuery(hql1, conditions))
+			return true;
+		else 
+			return false;
 	}
+
 
 	@Override
 	public void updateQuestion(File file) throws IOException {
 		// TODO Auto-generated method stub
-		deleteAllQuestion();
 		int id=1;
 		InputStreamReader reader =new InputStreamReader(new FileInputStream(file));
 		BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言  
@@ -69,6 +75,18 @@ public class QuestionDaoImpl extends HibernateUtils implements QuestionDao {
 		}
 		return questions;
 	}
+	@Override
+	public List<Question> getQuestions(String producttype) {
+		// TODO Auto-generated method stub
+		String hql="from Question q where q.questionname=?";
+		List<Object> o=findByHqlGetList(hql, new Object[]{producttype});
+		List<Question> questions=new ArrayList<>();
+		for(Object object:o)
+		{
+			questions.add((Question)object);
+		}
+		return questions;
+	}
 
 	@Override
 	public Question getQuestion(String question) {
@@ -85,7 +103,19 @@ public class QuestionDaoImpl extends HibernateUtils implements QuestionDao {
 		conditions.add(id);
 		return deleteByQuery(hql, conditions);
 	}
-
-	
+	@Override
+	public boolean deleteQuestionaire(String name) {
+		// TODO Auto-generated method stub
+		String hql="delete from Question q where q.questionname=?";
+		List<Object> conditions=new ArrayList<>();
+		conditions.add(name);
+		return deleteByQuery(hql, conditions);
+	}
+	@Override
+	public List<Object> SearchQuestion(String name)
+	{
+		String hql="from Question q where q.questionname=?";
+		return findByHqlGetList(hql, new Object[]{name});
+	}
 
 }

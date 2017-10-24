@@ -4,6 +4,8 @@ import java.util.List;
 
 
 import com.vr.domain.Encyclopedia_prop;
+import com.vr.util.response.Encyclopedia_all_HJC;
+import com.vr.util.response.Encyclopedia_propSearchResultData;
 
 public interface Encyclopedia_propService {
 	
@@ -17,6 +19,6 @@ public interface Encyclopedia_propService {
 
 	public Encyclopedia_prop getFirstEncyclopedia_propById(int id);
 	public boolean encyclopedia_prodelete(int id,int prop_id);
-	
+	public List<Encyclopedia_propSearchResultData> encyclopedia_prodeleteSearch(String prop_keyword);
 	public Encyclopedia_prop getEncyclopedia_propById(int id,int prop_id);
 }

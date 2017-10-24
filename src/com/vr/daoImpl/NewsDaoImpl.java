@@ -61,27 +61,27 @@ public class NewsDaoImpl extends HibernateUtils implements NewsDao {
 			return listpage(hql, pageNo,pageNum);
 		}
 		if(type == 1) {
-			String hql="from News as n where type = 1 order by id desc";
+			String hql="from News as n where type = 1 order by last_edit_time desc";
 			return listpage(hql, pageNo,pageNum);
 		}
 		if(type == 2) {
-			String hql="from News as n where type = 2 order by id desc";
+			String hql="from News as n where type = 2 order by last_edit_time desc";
 			return listpage(hql, pageNo,pageNum);
 		}
 		if(type == 3) {
-			String hql="from News as n where type = 3 order by id desc";
+			String hql="from News as n where type = 3 order by last_edit_time desc";
 			return listpage(hql, pageNo,pageNum);
 		}
 		if(type == 4) {
-			String hql="from News as n where type = 4 order by id desc";
+			String hql="from News as n where type = 4 order by last_edit_time desc";
 			return listpage(hql, pageNo,pageNum);
 		}
 		if(type == 5) {
-			String hql="from News as n where type = 5 order by id desc";
+			String hql="from News as n where type = 5 order by last_edit_time desc";
 			return listpage(hql, pageNo,pageNum);
 		}
 		if(type == 6) {
-			String hql="from News as n where type = 6 order by id desc";
+			String hql="from News as n where type = 6 order by last_edit_time desc";
 			return listpage(hql, pageNo,pageNum);
 		}
 		else {
