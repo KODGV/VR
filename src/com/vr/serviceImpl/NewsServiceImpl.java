@@ -57,7 +57,7 @@ public class NewsServiceImpl implements NewsService{
 		String content = "";
 		StringBuilder sb = new StringBuilder();
 		try {
-			bf =new BufferedReader(new InputStreamReader(new FileInputStream("/"+path+".txt"), "GBK")); 
+			bf =new BufferedReader(new InputStreamReader(new FileInputStream(path), "utf8")); 
 			//bf =new BufferedReader(new InputStreamReader(new FileInputStream("D:\\news\\test" + news_id + ".txt"), "GBK"));  
 			while (content != null) {
 				content = bf.readLine();

@@ -59,5 +59,12 @@ public class MessageDaoImpl extends HibernateUtils implements MessageDao{
 			return listpage(hql,pageNo, 10);
 		}
 
+	@Override
+	public Object getMessageByBelong(String belong, String type) {
+		// TODO Auto-generated method stub
+		String hql="from "+type+" a where a.belong=?";
+		return findByHql(hql,new Object[]{belong});
+	}
+
 
 }

@@ -14,4 +14,5 @@ public interface UserDao {
       public User getUserById(Integer id);
       public List<Object>getAllUsers();
       public List<Object>getAllUsersVague(String key,String keyword);
+      public Object getUserByNickname(String nickname);
 }

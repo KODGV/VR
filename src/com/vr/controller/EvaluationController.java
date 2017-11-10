@@ -64,10 +64,13 @@ public class EvaluationController {
 		evaluation.setUpdateTime(date);
 		evaluation.setPostTime(date);
 		try{
-			result=evaluationService.addEvaluation(evaluation,request);
+			String path = request.getSession().getServletContext().getRealPath("/static/img/content/");
+			String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/static/img/content/";
+			result=evaluationService.addEvaluation(evaluation,path,url);
 		}catch(Exception e){
 			e.printStackTrace();
-			LOGGER.error("[opt:addEvaluation...evaluation:{},error:{}]",evaluation,e);
+		
 			result=new CommonResult(Result.SYSTEM_EXCEPTION);
 		}
 		return result;

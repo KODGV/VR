@@ -78,8 +78,7 @@ public class QuestionDaoImpl extends HibernateUtils implements QuestionDao {
 	@Override
 	public List<Question> getQuestions(String producttype) {
 		// TODO Auto-generated method stub
-		String hql="from Question q where q.questionname=?";
-		List<Object> o=findByHqlGetList(hql, new Object[]{producttype});
+		List<Object> o=SearchQuestion(producttype);
 		List<Question> questions=new ArrayList<>();
 		for(Object object:o)
 		{
@@ -89,10 +88,10 @@ public class QuestionDaoImpl extends HibernateUtils implements QuestionDao {
 	}
 
 	@Override
-	public Question getQuestion(String question) {
+	public Question getQuestion(String question,String name) {
 		// TODO Auto-generated method stub
-		String hql="from Question q where q.question=?";
-		return (Question)findByHql(hql, new Object[]{question});
+		String hql="from Question q where q.question=? and q.questionname=?";
+		return (Question)findByHql(hql, new Object[]{question,name});
 	}
 
 	@Override

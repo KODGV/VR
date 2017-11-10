@@ -1,5 +1,7 @@
 package com.vr.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -20,10 +23,12 @@ import com.vr.domain.MessageLeaving;
 import com.vr.domain.MessageResponse;
 import com.vr.domain.Posts;
 import com.vr.domain.User;
+import com.vr.domain.Usermessage;
 import com.vr.service.AdminService;
 import com.vr.service.MessageLeavingService;
 import com.vr.service.MessageResponseService;
 import com.vr.service.PostsService;
+import com.vr.service.UserMessageServiece;
 import com.vr.service.UserService;
 import com.vr.util.ContextUtil;
 import com.vr.util.FileOperation;
@@ -51,6 +56,9 @@ public class PostsController {
 	@Autowired
 	@Qualifier("messageResponseServiceImpl")
 	private MessageResponseService messageResponseService;
+	@Autowired
+	@Qualifier("userMessageServiceImpl")
+	private UserMessageServiece userMessageService;
 	
 	public PostsService getPostsService() {
 		return PostsService;
@@ -106,7 +114,10 @@ public class PostsController {
 
 		String title = map.get("title");
 		String content = map.get("content");
-		content=FileOperation.base64img(content, request);
+		String path = request.getSession().getServletContext().getRealPath("/static/img/content/");
+		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/static/img/content/";
+		content=FileOperation.base64img(content, path,url);
 		String theme = map.get("theme");
 		User user = userService.getUserById(userid);
 		Posts posts= PostsService.PostSave(user, title, content, theme);
@@ -120,7 +131,10 @@ public class PostsController {
 	public void AdminPostAdd(@RequestBody Map<String, String> map,HttpServletRequest request) {
 		String title = map.get("title");
 		String content = map.get("contents");
-		content=FileOperation.base64img(content, request);
+		String path = request.getSession().getServletContext().getRealPath("/static/img/content/");
+		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/static/img/content/";
+		content=FileOperation.base64img(content, path,url);
 		String theme = map.get("theme");
 		String uid = map.get("AdminId");
 		int userid = Integer.parseInt(uid);
@@ -135,15 +149,22 @@ public class PostsController {
 	//管理员后台删帖
 	@ResponseBody
 	@RequestMapping("/adminPostDelete")
-	public void AdminPostAdd(@RequestBody List<Integer> pid) {
+	public void AdminPostAdd(@RequestBody List<Integer>pid) {
 		int size = pid.size();
 		System.out.print(size);
 		for(int i = 0;i < size ;i++ ) {
 		int id = pid.get(i);
 		Posts posts = PostsService.getPostsById(id);
+		//我告诉你这里前端传过来的值有问题！
 		PostsService.deletePostComment(id);
+		User user=(User)userService.getUserDao().getUserByNickname(posts.getPosterName());
+		Date date=new Date();
+		String sdate=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);  
+		Usermessage usermessage=new Usermessage("Post", "删除",posts.getTitle(), sdate, user, 0,posts.getId());
+		userMessageService.getUserMessageDao().CreateMessage(usermessage);
 	    boolean isDelete = PostsService.deletePosts(posts);
 		}
+
 	}
 	//管理员后台删除评论
 		@ResponseBody
@@ -181,7 +202,10 @@ public class PostsController {
 		System.out.print("id" + id);
 		String title = map.get("title");//前端传给后台的变量名字
 		String contents = map.get("contents");
-		contents=FileOperation.base64img(contents, request);
+		String path = request.getSession().getServletContext().getRealPath("/static/img/content/");
+		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/static/img/content/";
+		contents=FileOperation.base64img(contents, path,url);
 		String theme = map.get("theme");
 		Posts posts = PostsService.getPostsById(id);
 		if(title.length()!=0)

@@ -58,6 +58,7 @@
 				<value>com/vr/domain/Encyclopedia_prop.hbm.xml</value>
 				<value>com/vr/domain/Encyclopedia_propchangerequire.hbm.xml</value>
 					<value>com/vr/domain/Posts.hbm.xml</value>
+					<value>com/vr/domain/UserMessage.hbm.xml</value>
 					<!-- 师兄的代码 -->
 					<value>com/vr/domain/Evaluation.hbm.xml</value>
 				<value>com/vr/domain/EvaluationText.hbm.xml</value>

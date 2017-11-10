@@ -65,5 +65,12 @@ public class UserDaoImpl extends HibernateUtils implements UserDao {
 		return findByHqlGetList("from User n where n."+key+" like ?",new Object[]{"%"+keyword+"%"});
 	}
 
+	@Override
+	public Object getUserByNickname(String nickname) {
+		// TODO Auto-generated method stub
+		String hql="from User u where u.nickname=?";
+		return findByHql(hql, new Object[]{nickname});
+	}
+
 
 }

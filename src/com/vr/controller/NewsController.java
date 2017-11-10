@@ -74,6 +74,8 @@ public class NewsController {
 			}
 			else {
 				List<News> news = newsService.getNewsByPage(page, 5, type);
+				System.out.println("ni");
+				System.out.println(news.size());
 				return news;
 			}
 	}
@@ -93,12 +95,10 @@ public class NewsController {
 	@JsonView(NewsView.Tag.class)
 	public void NewsSubmit(@RequestBody News n) throws UnsupportedEncodingException {
 		String path_=n.getPath();
-		String path="/"+path_+".txt";
-		String pathset=path.split(".txt")[0];
-		System.out.println(path_);
-		System.out.println(pathset);
-		n.setPath(pathset);
-		File f = new File(path);
+		n.setLastEditTime("发布时间:"+n.getLastEditTime());
+		n.setPath(path_);
+		File f = new File(path_);
+
 		f.setWritable(true, false);
 		try {
 			if(FileOperation.createFile(f)) {
@@ -116,13 +116,12 @@ public class NewsController {
 	@RequestMapping(value = "/NewsRelease")
 	@JsonView(NewsView.Tag.class)
 	public void NewsRelease(@RequestBody News n) {
-		System.out.println("type");
-		System.out.println(n.getType());
 		Integer id = newsService.getNewsId();
-		String path="home/news/test"+id;
+		String path="/home/news/news"+id+".txt";
+		n.setLastEditTime("发布时间："+n.getLastEditTime());
 		n.setPath(path);
 		newsService.createNews(n);
-		File f = new File("/"+path+".txt");
+		File f = new File(path);
 		f.setWritable(true, false);
 		try {
 			if(FileOperation.createFile(f)) {

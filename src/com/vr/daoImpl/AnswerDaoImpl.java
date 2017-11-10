@@ -54,7 +54,7 @@ public class AnswerDaoImpl extends HibernateUtils implements AnswerDao{
 		{
 			Answer answer=new Answer();
 			answer.setAnswer(answerque.getAnswer());
-			answer.setQuestion(questiondao.getQuestion(answerque.getQuestion()));
+			answer.setQuestion(questiondao.getQuestion(answerque.getQuestion(),answerque.getProducttype()));
 			answer.setUser(userDao.getUserById(Integer.parseInt(answerque.getUser())));
 			answer.setProductname(answerque.getProductname());
 			answer.setProducttype(answerque.getProducttype());

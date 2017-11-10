@@ -2,6 +2,7 @@ package com.vr.service;
 
 import java.util.List;
 
+import com.vr.dao.UserDao;
 import com.vr.domain.User;
 import com.vr.util.response.CommonResult;
 
@@ -21,4 +22,5 @@ public interface UserService {
   	public CommonResult getAllUsersByVagueName(String keyword);
   	public CommonResult getAllUsersResult();
   	public boolean activeUserEmail(int id);
+  	public UserDao getUserDao();
 }

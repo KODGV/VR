@@ -57,7 +57,7 @@ public class NewsDaoImpl extends HibernateUtils implements NewsDao {
 	@Override
 	public List<Object> getNewsByPage(int pageNo, int pageNum, Integer type) {
 		if(type == 0) {
-			String hql="from News as n order by id desc";
+			String hql="from News as n order by last_edit_time desc";
 			return listpage(hql, pageNo,pageNum);
 		}
 		if(type == 1) {

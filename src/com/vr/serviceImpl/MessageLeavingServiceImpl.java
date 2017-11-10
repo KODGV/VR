@@ -88,10 +88,9 @@ public class MessageLeavingServiceImpl implements com.vr.service.MessageLeavingS
 	@Override
 	public void MessageUpvoted(int id,int userid,int upvote) {
 		// TODO Auto-generated method stub
-		MessageLeaving MessageLeaving = (MessageLeaving)dao.getMessageById(id, "MessageLeaving");
-		MessageLeaving.setUpvote(MessageLeaving.getUpvote() + upvote);
-		dao.updateMessage(MessageLeaving);
-
+		MessageLeaving messageLeaving = (MessageLeaving)dao.getMessageById(id, "MessageLeaving");
+		messageLeaving.setUpvote(messageLeaving.getUpvote() + upvote);
+		dao.updateMessage(messageLeaving);
 	}
 	@Override
 	public int check(int userid, String name) {

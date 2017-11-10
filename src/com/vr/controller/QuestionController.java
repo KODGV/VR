@@ -69,6 +69,7 @@ public class QuestionController extends HibernateUtils{
 		 
 	}
 	// ok
+	@ResponseBody
 	@RequestMapping("/Answer")
 	public void saveAnswer(@RequestBody List<AnswerRequest> answers) {
 		System.out.println(answers.size());
@@ -79,8 +80,8 @@ public class QuestionController extends HibernateUtils{
 	@ResponseBody
 	@RequestMapping("/Answer/statistic")
 	public List<Statisticalanswer> getAnswers(@RequestParam("producttype")String pt) {
-		String producttype=EncodeUtil.encodeStr(pt);
-		return answerService.getStatisticalData(producttype);
+		
+		return answerService.getStatisticalData(pt);
 	}
 	
 	@ResponseBody
@@ -161,9 +162,8 @@ public class QuestionController extends HibernateUtils{
 	 */
 	@ResponseBody
 	@RequestMapping("/Question/deleteQuestionare")
-	public ResponseData deleteQuestionaire(@RequestBody Map<String, String> map) {
-		String name=map.get("questionnaireName");
-		if (dao.deleteQuestionaire(name)) {
+	public ResponseData deleteQuestionaire(@RequestParam("questionnariename")String questionnariename) {
+		if (dao.deleteAllQuestion(questionnariename)) {
 			return new ResponseData(Code.SUCCEED);
 		} else {
 			return new ResponseData(Code.DATABASE_ERROR);

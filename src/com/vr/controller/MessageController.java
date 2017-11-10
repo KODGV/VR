@@ -92,6 +92,7 @@ public class MessageController {
 		int userid = Integer.parseInt(uid);
 
 		int id = Integer.parseInt(map.get("id"));
+		
 		int upvote=Integer.parseInt(map.get("value"));
 		messageLeavingService.MessageUpvoted(id, userid,upvote);
 		;

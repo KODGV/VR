@@ -40,6 +40,7 @@ public class AnswerServiceImpl implements AnswerService{
 	@Override
 	public List<Statisticalanswer> getStatisticalData(String producttype) {
 		// TODO Auto-generated method stub
+
 		List<Statisticalanswer>statisticalanswers=new ArrayList<>();
 		List<Question>list=questionDao.getQuestions(producttype);
 		System.out.println("问题");

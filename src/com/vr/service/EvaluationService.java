@@ -12,7 +12,7 @@ import com.vr.util.response.CommonResult;
 
 public interface EvaluationService {
 
-	CommonResult addEvaluation(Evaluation evaluation,HttpServletRequest request);
+	CommonResult addEvaluation(Evaluation evaluation,String path,String url);
 
 	CommonResult addEvaluationView(EvaluationView evaluationView);
 

@@ -34,12 +34,15 @@ public class EvaluationServiceImpl implements EvaluationService {
 	private EvaluationDao evaluationDao;
 
 	@Override
-	public CommonResult addEvaluation(Evaluation evaluation,HttpServletRequest request) {
+	public CommonResult addEvaluation(Evaluation evaluation,String path,String url) {
 		/*
 		 * 图片转码
 		 */
 		EvaluationText evaluationText=evaluation.getEvaluationText();
-		evaluationText.setEvaluationBody(FileOperation.base64img(evaluationText.getEvaluationBody(), request));
+		System.out.println("dsdsdsdsdwrwr"+evaluationText);
+		String k=FileOperation.base64img(evaluationText.getEvaluationBody(), path,url);
+		System.out.println("dsdsd"+k);
+		evaluation.getEvaluationText().setEvaluationBody(k);
 		evaluationDao.addEvaluation(evaluation);
 		CommonResult result=new CommonResult(Result.SUCCESS);
 		result.setObject(evaluation);
@@ -131,7 +134,8 @@ public class EvaluationServiceImpl implements EvaluationService {
 			int comments = ((Long) evaluationDao.getComments(evaluation.getEvaluationId())).intValue();
 			evaluation.setComments(comments);
 		}
-		int totalCount = evaluationVOs.size();
+		//int totalCount = evaluationVOs.size();
+		int totalCount=((Long)evaluationDao.getEvaluationCount()).intValue();
 		Page p = new Page(page, totalCount / size + (totalCount % size == 0 ? 0 : 1));
 //		System.out.println(EvaluationVO);
 		Map<String, Object> map = new HashMap<>();

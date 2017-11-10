@@ -38,6 +38,8 @@ public Thumbsupdown getThumbs(@PathVariable String uid,@RequestBody Map<String, 
 	String name = map.get("belong");
 
 	Thumbsupdown thumbsupdown=dao.getThumbsupdown(name);
+	System.out.println("upvote");
+	System.out.println(thumbsupdown.getUpvote());
 	thumbsupdown.setState(thumbsupdownService.check(userid, name));
 
 	return thumbsupdown;
